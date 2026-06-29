@@ -6,7 +6,7 @@ export default function ProtectedRoute() {
 
   if (!token || !expiry || Date.now() > Number(expiry)) {
     localStorage.clear();
-    return <Navigate to="admin/login" replace />;
+    return <Navigate to="/admin/login" replace />;
   }
 
   return <Outlet />;
