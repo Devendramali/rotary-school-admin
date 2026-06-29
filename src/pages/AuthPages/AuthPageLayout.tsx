@@ -18,7 +18,7 @@ export default function AuthLayout({
             <GridShape />
             <div className="flex flex-col items-center max-w-xs">
               <Link to="admin/" className="block mb-4">
-                <h2 className="text-[40px] font-[600] text-white">पळसुन ग्रामपंचायत</h2>
+                <h2 className="text-[40px] font-[600] text-white">Rotary English School</h2>
               </Link>
               <p className="text-center text-gray-400 dark:text-white/60">
               ग्रामपंचायतीच्या डिजिटल सेवेत आपले मनःपूर्वक स्वागत

@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router";
+import logo from "../../public/logo-wide.png"
+import favicon from "../../public/favicon.png"
 
 // Assume these icons are imported from an icon library
 import {
@@ -45,16 +47,14 @@ const navItems: NavItem[] = [
     name: "Dashboard",
     path: "admin/"
   },
-  {
-    name: "मुखपृष्ठ",
-    icon: <House  />,
-    subItems: [
-      { name: "बॅनर", path: "admin/banner", pro: false },
-      // { name: "ग्रामपंचायतीची माहिती", path: "/g", pro: false },
-      // { name: "प्रमुख पदाधिकारी", path: "/ g", pro: false },
-      { name: "सुविचार", path: "admin/suvichar", pro: false }
-    ],
-  },
+  // {
+  //   name: "मुखपृष्ठ",
+  //   icon: <House  />,
+  //   subItems: [
+  //     { name: "बॅनर", path: "admin/banner", pro: false },
+  //     { name: "सुविचार", path: "admin/suvichar", pro: false }
+  //   ],
+  // },
   // {
   //   icon: <CalenderIcon />,
   //   name: "Calendar",
@@ -65,80 +65,135 @@ const navItems: NavItem[] = [
   //   name: "User Profile",
   //   path: "/profile",
   // },
-  {
-    name: "आमच्याबद्दल",
-    icon: <UserCircleIcon />,
-    subItems: [
-      { name: "ग्रामबॉडी", path: "admin/grambody", pro: false },
-      { name: "प्रशासकीय अधिकारी", path: "admin/administrative-officers", pro: false },
-      { name: "गौरवशाली व्यक्ती", path: "admin/gloriouspersons", pro: false },
-    ],
-  },
+  // {
+  //   name: "आमच्याबद्दल",
+  //   icon: <UserCircleIcon />,
+  //   subItems: [
+  //     { name: "ग्रामबॉडी", path: "admin/grambody", pro: false },
+  //     { name: "प्रशासकीय अधिकारी", path: "admin/administrative-officers", pro: false },
+  //     { name: "गौरवशाली व्यक्ती", path: "admin/gloriouspersons", pro: false },
+  //   ],
+  // },
 
   {
-    name: "माननीय मंत्री व पदाधिकारी",
+    name: "Facilities",
     icon: <UserIcon />,
      path: "admin/mananiy-adhikari",
   },
  
-  {
-    name: "पुरस्कार व सन्मान",
-    icon: <Trophy />,
-    path: "admin/awards",
-  },
-  {
-    name: "गावातील कार्यक्रम",
-    icon: <Calendar />,
-    path: "admin/events",
-  },
-   {
-    name: "आमची शाळा",
-    icon: <School />,
-    path: "admin/school-info"
-  },
-  {
-    name: "सूचना",
-    icon: <Bell />,
-     path: "admin/notice-manager",
-  },
+  // {
+  //   name: "पुरस्कार व सन्मान",
+  //   icon: <Trophy />,
+  //   path: "admin/awards",
+  // },
+  // {
+  //   name: "गावातील कार्यक्रम",
+  //   icon: <Calendar />,
+  //   path: "admin/events",
+  // },
+  //  {
+  //   name: "आमची शाळा",
+  //   icon: <School />,
+  //   path: "admin/school-info"
+  // },
+  // {
+  //   name: "सूचना",
+  //   icon: <Bell />,
+  //    path: "admin/notice-manager",
+  // },
 
   {
-    name: "गॅलरी",
+    name: "President Message",
+    icon: <Image1 />,
+    path: "admin/president-message"
+  },  
+  {
+    name: "Principle Message",
+    icon: <Image1 />,
+    path: "admin/principle-message"
+  },  
+  {
+    name: "Gallery",
     icon: <Image1 />,
     path: "admin/gallery"
   },  
   {
-    name: "शासकीय लिंक्स",
-    icon: <Link1 />,
-    path: "admin/implinks"
+    name: "Student Strength",
+    icon: <Image1 />,
+    path: "admin/student-strength"
   },  
   {
-    name: "शासन निर्णय",
+    name: "Annual Reports",
+    icon: <Image1 />,
+    path: "admin/annual-reports"
+  },  
+  {
+    name: "Press Release",
+    icon: <Image1 />,
+    path: "admin/press-release"
+  },  
+  {
+    name: "Alumni",
+    icon: <Image1 />,
+    path: "admin/alumni"
+  },  
+  {
+    name: "Text Books",
+    icon: <Image1 />,
+    path: "admin/textbooks"
+  },  
+  // {
+  //   name: "शासकीय लिंक्स",
+  //   icon: <Link1 />,
+  //   path: "admin/implinks"
+  // },  
+  {
+    name: "Mandatory Disclosure",
     icon: <BoxCubeIcon />,
-     path: "admin/shashanNirnay",
+     path: "admin/mandatory-disclosure",
   },
   {
-    name: "जमा-खर्च पत्रक",
-    icon: <Chartspline />,
-     path: "admin/reports",
-  },
-    {
-    name: "शासकीय योजना",
-    icon: <Landmark />,
-     path: "admin/govprograms",
-  },
-    {
-    name: "स्वयंघोषणापत्रे",
-    icon: <Filecheck />,
-     path: "admin/swayamghoshna",
-  },
-    {
-    name: "माहिती अधिकार",
-    icon: <Bookopen />,
-     path: "admin/mahitiadhikar",
+    name: "Fee Management",
+    icon: <BoxCubeIcon />,
+     path: "admin/fee-management",
   },
   {
-    name: "तक्रार/संपर्क यादी",
+    name: "Faculty",
+    icon: <BoxCubeIcon />,
+     path: "admin/faculty",
+  },
+  {
+    name: "Achievements",
+    icon: <BoxCubeIcon />,
+     path: "admin/achievements",
+  },
+  {
+    name: "Parent Teacher Association",
+    icon: <BoxCubeIcon />,
+     path: "admin/pta",
+  },
+  // {
+  //   name: "जमा-खर्च पत्रक",
+  //   icon: <Chartspline />,
+  //    path: "admin/reports",
+  // },
+  //   {
+  //   name: "शासकीय योजना",
+  //   icon: <Landmark />,
+  //    path: "admin/govprograms",
+  // },
+  //   {
+  //   name: "स्वयंघोषणापत्रे",
+  //   icon: <Filecheck />,
+  //    path: "admin/swayamghoshna",
+  // },
+  //   {
+  //   name: "माहिती अधिकार",
+  //   icon: <Bookopen />,
+  //    path: "admin/mahitiadhikar",
+  // },
+  {
+    name: "Contact List",
     icon: <Messagessquare />,
      path: "admin/contact-list",
   },
@@ -366,14 +421,19 @@ const AppSidebar: React.FC = () => {
         <Link to="admin/">
           {isExpanded || isHovered || isMobileOpen ? (
             <>
-             <h2 className="text-[30px] text-center font-[600]">पळसुन</h2>
+             <img
+              src={logo}
+              alt="Logo"
+              // width={32}
+              height={32}
+            />
             </>
           ) : (
             <img
-              src="/clean_logo.png"
+              src={favicon}
               alt="Logo"
-              width={32}
-              height={32}
+              width={60}
+              height={60}
             />
           )}
         </Link>
@@ -397,7 +457,7 @@ const AppSidebar: React.FC = () => {
               </h2>
               {renderMenuItems(navItems, "main")}
             </div>
-            <div className="">
+            {/* <div className="">
               <h2
                 className={`mb-4 text-xs uppercase flex leading-[20px] text-gray-400 ${
                   !isExpanded && !isHovered
@@ -412,10 +472,9 @@ const AppSidebar: React.FC = () => {
                 )}
               </h2>
               {renderMenuItems(othersItems, "others")}
-            </div>
+            </div> */}
           </div>
         </nav>
-        {/* {isExpanded || isHovered || isMobileOpen ? <SidebarWidget /> : null} */}
       </div>
     </aside>
   );

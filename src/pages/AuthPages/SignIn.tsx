@@ -6,8 +6,8 @@ export default function SignIn() {
   return (
     <>
       <PageMeta
-        title="पळसुन ग्रामपंचायत"
-        description="पळसुन ग्रामपंचायत"
+        title="Rotary English School"
+        description="Rotary English School"
       />
       <AuthLayout>
         <SignInForm />

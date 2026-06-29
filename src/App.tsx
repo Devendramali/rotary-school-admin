@@ -39,6 +39,18 @@ import { useEffect } from "react";
 import Banner from "./pages/grampanchayat/Banner";
 import MananiyAdhikari from "./pages/grampanchayat/MananiyAdhikari";
 import ShashanNirnay  from "./pages/grampanchayat/ShashanNirnay";
+import PresidentMessage from "./pages/grampanchayat/PresidentMessage";
+import PrincipleMessage from "./pages/grampanchayat/PrincipleMessage";
+import Activities from "./pages/grampanchayat/Activities";
+import Textbooks from "./pages/grampanchayat/Textbooks";
+import StudentStrength from "./pages/grampanchayat/StudentStrength";
+import Alumni from "./pages/grampanchayat/Alumni";
+import AnnualReports from "./pages/grampanchayat/AnnualReports";
+import PressRelease from "./pages/grampanchayat/PressRelease";
+import FeeManagement from "./pages/grampanchayat/FeeManagement";
+import Faculty from "./pages/grampanchayat/Faculty";
+import Achievements from "./pages/grampanchayat/Achievements";
+import PTA from "./pages/grampanchayat/PTA";
 
 export default function App() {
 
@@ -109,7 +121,19 @@ useEffect(() => {
             <Route path="admin/videos" element={<Videos />} />
             <Route path="admin/line-chart" element={<LineChart />} />
             <Route path="admin/bar-chart" element={<BarChart />} />
-            <Route path="admin/shashanNirnay" element={<ShashanNirnay/>}/>
+            <Route path="admin/mandatory-disclosure" element={<ShashanNirnay/>}/>
+            <Route path="admin/president-message" element={<PresidentMessage/>}/>
+            <Route path="admin/principle-message" element={<PrincipleMessage/>}/>
+            <Route path="admin/activities" element={<Activities/>}/>
+            <Route path="admin/textbooks" element={<Textbooks />} />
+            <Route path="admin/student-strength" element={<StudentStrength />} />
+            <Route path="admin/alumni" element={<Alumni />} />
+            <Route path="admin/annual-reports" element={<AnnualReports />} />
+            <Route path="admin/press-release" element={<PressRelease />} />
+            <Route path="admin/fee-management" element={<FeeManagement />} />
+            <Route path="admin/faculty" element={<Faculty />} />
+            <Route path="admin/achievements" element={<Achievements />} />
+            <Route path="admin/pta" element={<PTA />} />
             
           </Route>
         </Route>

@@ -6,8 +6,8 @@ export default function NotFound() {
   return (
     <>
       <PageMeta
-        title="पळसुन ग्रामपंचायत"
-        description="पळसुन ग्रामपंचायत"
+        title="Rotary English School"
+        description="Rotary English School"
       />
       <div className="relative flex flex-col items-center justify-center min-h-screen p-6 overflow-hidden z-1">
         <GridShape />

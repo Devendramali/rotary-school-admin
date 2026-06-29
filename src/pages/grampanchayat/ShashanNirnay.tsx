@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import API from "../../api/api";
 
-export default function ShashanNirnay() {
+export default function Shashannirnay() {
 
   const [nirnay, setnirnayList] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -16,7 +16,7 @@ export default function ShashanNirnay() {
   // Fetch PDFs
   const fetchNirnay = async () => {
     try {
-      const res = await API.get("/shashanNirnay");
+      const res = await API.get("/shashannirnay");
       setnirnayList(res.data);
     } catch (err) {
       console.error(err);
@@ -63,9 +63,9 @@ export default function ShashanNirnay() {
       if (formData.file) data.append("file", formData.file);
 
       if (editId) {
-        await API.put(`/shashanNirnay/${editId}`, data);
+        await API.put(`/shashannirnay/${editId}`, data);
       } else {
-        await API.post("/shashanNirnay", data);
+        await API.post("/shashannirnay", data);
       }
 
       fetchNirnay();
@@ -83,7 +83,7 @@ export default function ShashanNirnay() {
     if (!confirm("Delete this PDF?")) return;
 
     try {
-      await API.delete(`/shashanNirnay/${id}`);
+      await API.delete(`/shashannirnay/${id}`);
       fetchNirnay();
     } catch {
       alert("Delete failed");
@@ -91,7 +91,7 @@ export default function ShashanNirnay() {
   };
      const toggleStatus = async (id: string) => {
           try {
-            await API.put(`/shashanNirnay/toggle/${id}`);
+            await API.put(`/shashannirnay/toggle/${id}`);
                   fetchNirnay();
           } catch (err) {
             console.error(err);
@@ -106,7 +106,7 @@ export default function ShashanNirnay() {
 
             {/* Header */}
             <div className="flex justify-between px-6 py-4">
-              <h3 className="text-lg font-semibold">Government Decision (PDF)</h3>
+              <h3 className="text-lg font-semibold">Mandatory Disclosure</h3>
 
               <button
                 onClick={openModal}

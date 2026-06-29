@@ -8,7 +8,7 @@ export default function UserProfiles() {
   return (
     <>
       <PageMeta
-        title="पळसुन ग्रामपंचायत"
+        title="Rotary English School"
         description=""
       />
       <PageBreadcrumb pageTitle="Profile" />

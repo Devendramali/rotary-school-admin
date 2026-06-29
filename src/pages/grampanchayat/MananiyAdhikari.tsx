@@ -5,10 +5,12 @@ export default function MananiyAdhikari() {
   const [list, setList] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editId, setEditId] = useState(null);
+    const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
-    post: "",
+    category: "",
+    discription: "",
     image: null,
   });
 
@@ -22,7 +24,7 @@ export default function MananiyAdhikari() {
   }, []);
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
+    const { name,  value, files } = e.target;
 
     if (name === "image") {
       setFormData({ ...formData, image: files[0] });
@@ -33,10 +35,12 @@ export default function MananiyAdhikari() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+     setLoading(true);
+try {
     const data = new FormData();
     data.append("name", formData.name);
-    data.append("post", formData.post);
+    data.append("category", formData.category);
+    data.append("discription", formData.discription);
 
     if (formData.image) {
       data.append("image", formData.image);
@@ -52,11 +56,17 @@ export default function MananiyAdhikari() {
     setEditId(null);
     setFormData({
       name: "",
-      post: "",
+      discription: "",
+      category: "",
       image: null,
     });
 
     fetchData();
+  }catch (err) {
+      console.error(err);
+      alert("Upload failed");
+    }
+      setLoading(false);
   };
 
   const handleDelete = async (id) => {
@@ -75,7 +85,7 @@ export default function MananiyAdhikari() {
         {/* Header */}
         <div className="flex justify-between px-6 py-4">
           <h3 className="text-lg font-semibold">
-            माननीय मंत्री व पदाधिकारी
+           Facilities
           </h3>
 
           <button
@@ -85,14 +95,14 @@ export default function MananiyAdhikari() {
             }}
             className="px-4 py-2 bg-brand-500 text-white rounded-lg"
           >
-            + Add Member
+            + Add Facilities
           </button>
         </div>
 
         {/* Table */}
         <div className="grid grid-cols-12 border-t px-6 py-3 font-medium text-gray-500">
-          <div className="col-span-4">Name</div>
-          <div className="col-span-3">Post</div>
+          <div className="col-span-4">Title</div>
+          <div className="col-span-3">Category</div>
           <div className="col-span-2">Status</div>
           <div className="col-span-3 text-center">Action</div>
         </div>
@@ -112,7 +122,7 @@ export default function MananiyAdhikari() {
               <span>{item.name}</span>
             </div>
 
-            <div className="col-span-3">{item.post}</div>
+            <div className="col-span-3">{item.category}</div>
 
             <div className="col-span-2">
               <button
@@ -126,7 +136,21 @@ export default function MananiyAdhikari() {
             </div>
 
             <div className="col-span-3 flex justify-center gap-3">
-              <button className="text-blue-500">Edit</button>
+              <button
+              onClick={() => {
+                setEditId(item._id);
+                setFormData({
+                  name: item.name,
+                  category: item.category,
+                  discription: item.discription,
+                  image: null,
+                });
+                setShowModal(true);
+              }}
+              className="text-blue-500"
+            >
+              Edit
+            </button>
               <button
                 onClick={() => handleDelete(item._id)}
                 className="text-red-500"
@@ -149,8 +173,8 @@ export default function MananiyAdhikari() {
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center">
           <div className="bg-white p-6 rounded-xl w-[400px]">
             <h3 className="text-lg font-semibold mb-4">
-              Add Member
-            </h3>
+  {editId ? "Edit Member" : "Add Member"}
+</h3>
 
             <form onSubmit={handleSubmit} className="space-y-3">
               <input
@@ -160,14 +184,29 @@ export default function MananiyAdhikari() {
                 placeholder="Name"
                 className="w-full border p-2 rounded"
               />
+               <select
+  name="category"
+  value={formData.category}
+  onChange={handleChange}
+  className="w-full border px-3 py-2 rounded-lg"
+>
+  <option value="">Select Category</option>
+  <option value="Events">Events</option>
+  <option value="Sports">Sports</option>
+  <option value="Science">Science</option>
+  <option value="Arts & Culture">Arts & Culture</option>
+  <option value="Classrooms">Classrooms</option>
+  <option value="Campus">Campus</option>
+</select>
+
 
               <input
-                name="post"
-                value={formData.post}
-                onChange={handleChange}
-                placeholder="Post"
-                className="w-full border p-2 rounded"
-              />
+  name="discription"
+  value={formData.discription}
+  onChange={handleChange}
+  placeholder="Post"
+  className="w-full border p-2 rounded"
+/>
 
               <input
                 type="file"
@@ -176,15 +215,26 @@ export default function MananiyAdhikari() {
               />
 
               <div className="flex justify-end gap-2">
-                <button
-                  type="button"
-                  onClick={() => setShowModal(false)}
-                  className="border px-4 py-2 rounded"
+             <button
+  type="button"
+  onClick={() => {
+    setShowModal(false);
+    setEditId(null);
+    setFormData({
+      name: "",
+      category: "",
+      discription: "",
+      image: null,
+    });
+  }}
+  className="border px-4 py-2 rounded"
+>
+  Cancel
+</button>
+                <button className="bg-brand-500 text-white px-4 py-2 rounded"
+                  disabled={loading}
                 >
-                  Cancel
-                </button>
-                <button className="bg-brand-500 text-white px-4 py-2 rounded">
-                  Save
+                  {loading ? "Saving..." : "Save"}
                 </button>
               </div>
             </form>

@@ -8,11 +8,12 @@ export default function Gallery() {
   const [editId, setEditId] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const [formData, setFormData] = useState({
-    title: "",
-    file: null,
-  });
-
+const [formData, setFormData] = useState({
+  title: "",
+  year: "",
+  category: "",
+  file: null,
+});
   // Fetch Gallery
   const fetchGallery = async () => {
     try {
@@ -45,7 +46,16 @@ export default function Gallery() {
     try {
       const data = new FormData();
       data.append("title", formData.title);
+      data.append("year", formData.year);
+    data.append("category", formData.category);
       if (formData.file) data.append("file", formData.file);
+  
+      
+          // 👇 इथे टाक
+    
+        
+
+
 
       if (editId) {
         await API.put(`/gallery/${editId}`, data);
@@ -53,9 +63,15 @@ export default function Gallery() {
         await API.post("/gallery", data);
       }
 
+
       setShowModal(false);
       setEditId(null);
-      setFormData({ title: "", file: null });
+      setFormData({
+        title: "",
+        year: "",
+        category: "",
+        file: null,
+      });
       fetchGallery();
 
     } catch (err) {
@@ -68,7 +84,12 @@ export default function Gallery() {
 
   // Edit
   const handleEdit = (item) => {
-    setFormData({ title: item.title, file: null });
+    setFormData({
+      title: item.title,
+      year: item.year,
+      category: item.category,
+      file: null,
+    });
     setEditId(item._id);
     setShowModal(true);
   };
@@ -79,15 +100,15 @@ export default function Gallery() {
     await API.delete(`/gallery/${id}`);
     fetchGallery();
   };
-      // TOGGLE ACTIVE
-      const toggleStatus = async (id) => {
-        try {
-          await API.put(`/gallery/toggle/${id}`);
-          fetchGallery();
-        } catch (err) {
-          console.error(err);
-        }
-      };
+  // TOGGLE ACTIVE
+  const toggleStatus = async (id) => {
+    try {
+      await API.put(`/gallery/toggle/${id}`);
+      fetchGallery();
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <>
@@ -103,7 +124,12 @@ export default function Gallery() {
                 onClick={() => {
                   setShowModal(true);
                   setEditId(null);
-                  setFormData({ title: "", file: null });
+                  setFormData({
+                    title: "",
+                    year: "",
+                    category: "",
+                    file: null,
+                  });
                 }}
                 className="px-4 py-2 bg-brand-500 text-white rounded-lg"
               >
@@ -116,44 +142,51 @@ export default function Gallery() {
               <div className="min-w-[900px]">
 
                 {/* Header Row */}
-                <div className="grid grid-cols-11 border-t px-6 py-3">
-                  <div className="col-span-4 font-medium text-gray-500">Preview</div>
-                  <div className="col-span-4 font-medium text-gray-500">Title</div>
+                <div className="grid grid-cols-12 border-t px-6 py-3">
+                  <div className="col-span-2 font-medium text-gray-500">Preview</div>
+                  <div className="col-span-2 font-medium text-gray-500">Title</div>
+                  <div className="col-span-2 font-medium text-gray-500">Category</div>
+                  <div className="col-span-2 font-medium text-gray-500">Year</div>
                   <div className="col-span-1 font-medium text-gray-500">Status</div>
                   <div className="col-span-2 text-center font-medium text-gray-500">Action</div>
                 </div>
 
                 {/* Rows */}
                 {gallery.map((item) => (
-                  <div key={item._id} className="grid grid-cols-11 border-t px-6 py-4 items-center">
+                  <div key={item._id} className="grid grid-cols-12 border-t px-6 py-4 items-center">
 
                     {/* Preview */}
-                    <div className="col-span-4 flex items-center gap-3">
-  {item.file && (
-    item.type === "video" ? (
-      <video
-        src={item.file}
-        className="w-16 h-12 rounded object-cover"
-      />
-    ) : (
-      <img
-        src={item.file}
-        className="w-16 h-16 rounded object-cover border"
-      />
-    )
-  )}
-</div>
+                    <div className="col-span-2 flex items-center gap-3">
+                      {item.file && (
+                        item.type === "video" ? (
+                          <video
+                            src={item.file}
+                            className="w-16 h-12 rounded object-cover"
+                          />
+                        ) : (
+                          <img
+                            src={item.file}
+                            className="w-16 h-16 rounded object-cover border"
+                          />
+                        )
+                      )}
+                    </div>
 
                     {/* Title */}
-                    <div className="col-span-4">
+                    <div className="col-span-2">
                       {item.title}
                     </div>
-                       <td className="col-span-1">
+                    <div className="col-span-2">
+                      {item.category}
+                    </div>
+                    <div className="col-span-2">
+                      {item.year}
+                    </div>
+                    <td className="col-span-1">
                       <button
                         onClick={() => toggleStatus(item._id)}
-                        className={`px-3 py-1 rounded text-white ${
-                          item.isActive ? "bg-green-600" : "bg-gray-400"
-                        }`}
+                        className={`px-3 py-1 rounded text-white ${item.isActive ? "bg-green-600" : "bg-gray-400"
+                          }`}
                       >
                         {item.isActive ? "Active" : "Inactive"}
                       </button>
@@ -201,29 +234,44 @@ export default function Gallery() {
             </h3>
 
             <form onSubmit={handleSubmit} className="space-y-4">
-
-              <input
-                name="title"
+              <input name="title"
                 value={formData.title}
                 onChange={handleChange}
                 placeholder="Gallery Title"
                 required
+                className="w-full border px-3 py-2 rounded-lg" />
+              <input type="file" name="file" accept="image/*,video/mp4,video/webm,video/quicktime" onChange={handleChange} className="w-full" />
+              <input
+                name="year"
+                value={formData.year}
+                onChange={handleChange}
+                placeholder="Year"
                 className="w-full border px-3 py-2 rounded-lg"
               />
 
-              <input
-                type="file"
-                name="file"
-                accept="image/*,video/mp4,video/webm,video/quicktime"
-                onChange={handleChange}
-                className="w-full"
-              />
+         <select
+  name="category"
+  value={formData.category}
+  onChange={handleChange}
+  className="w-full border px-3 py-2 rounded-lg"
+>
+  <option value="">Select Category</option>
+  <option value="Events">Events</option>
+  <option value="Sports">Sports</option>
+  <option value="Science">Science</option>
+  <option value="Arts & Culture">Arts & Culture</option>
+  <option value="Classrooms">Classrooms</option>
+  <option value="Campus">Campus</option>
+</select>
 
               <div className="flex justify-end gap-3 pt-3">
 
                 <button
                   type="button"
-                  onClick={() => setShowModal(false)}
+                 onClick={() => {
+  setShowModal(false);
+  setEditId(null);
+}}
                   className="px-4 py-2 border rounded-lg"
                 >
                   Cancel
