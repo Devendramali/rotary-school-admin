@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router";
-import logo from "../../public/logo-wide.png"
-import favicon from "../../public/favicon.png"
+import logo from "/logo-wide.png"
+import favicon from "/favicon.png"
 
 // Assume these icons are imported from an icon library
 import {
