@@ -139,7 +139,7 @@ useEffect(() => {
         </Route>
 
         {/* 🔓 Public Auth Routes */}
-        <Route path="admin/login" element={<SignIn />} />
+        <Route path="/admin/login" element={<SignIn />} />
         <Route path="admin/signup" element={<SignUp />} />
 
         {/* ❌ 404 */}
