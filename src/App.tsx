@@ -51,6 +51,8 @@ import FeeManagement from "./pages/grampanchayat/FeeManagement";
 import Faculty from "./pages/grampanchayat/Faculty";
 import Achievements from "./pages/grampanchayat/Achievements";
 import PTA from "./pages/grampanchayat/PTA";
+import Notifications from "./pages/grampanchayat/Notifications";
+import ManagementCommittee from "./pages/grampanchayat/ManagementCommittee";
 
 export default function App() {
 
@@ -134,6 +136,8 @@ useEffect(() => {
             <Route path="admin/faculty" element={<Faculty />} />
             <Route path="admin/achievements" element={<Achievements />} />
             <Route path="admin/pta" element={<PTA />} />
+            <Route path="admin/notifications" element={<Notifications />} />
+            <Route path="admin/management-committee" element={<ManagementCommittee />}/>
             
           </Route>
         </Route>

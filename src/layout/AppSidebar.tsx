@@ -103,6 +103,21 @@ const navItems: NavItem[] = [
   // },
 
   {
+    name: "Activities",
+    icon: <Image1 />,
+    path: "admin/activities"
+  },  
+  {
+    name: "Notifications",
+    icon: <Image1 />,
+    path: "admin/notifications"
+  },  
+  {
+    name: "Management Committee",
+    icon: <Image1 />,
+    path: "admin/management-committee"
+  },  
+  {
     name: "President Message",
     icon: <Image1 />,
     path: "admin/president-message"
