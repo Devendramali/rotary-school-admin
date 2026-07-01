@@ -78,7 +78,7 @@ const navItems: NavItem[] = [
   {
     name: "Facilities",
     icon: <UserIcon />,
-     path: "admin/mananiy-adhikari",
+     path: "admin/facilities",
   },
  
   // {

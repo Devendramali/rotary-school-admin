@@ -109,8 +109,8 @@ useEffect(() => {
             <Route path="admin/school-info" element={<School />} />
             <Route path="admin/implinks" element={<Implink />} />
             <Route path="admin/banner" element={<Banner />} />
-            <Route path="admin/mananiy-adhikari" element={<MananiyAdhikari />} />
 
+            <Route path="admin/facilities" element={<MananiyAdhikari />} />
             <Route path="admin/calendar" element={<Calendar />} />
             <Route path="admin/blank" element={<Blank />} />
             <Route path="admin/form-elements" element={<FormElements />} />
